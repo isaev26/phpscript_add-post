@@ -1,0 +1,61 @@
+body {
+  background-color: #2222;
+}
+
+.form-exit {
+  display: inline;
+
+  form {
+    display: inline;
+  }
+}
+
+#is_admin {
+  color: red;
+}
+
+.posts {
+  .container {
+    max-width: 300px;
+
+    .post_name {
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .post_main {
+      border: 1px #2257 solid;
+      padding: 5px;
+    }
+
+    .post_info {
+      display: block;
+      margin-top: 5px;
+      color: whitesmoke;
+
+      .author {
+        display: inline;
+        border: 1px rgba(60, 196, 230, 0.467) solid;
+        padding: 1px;
+        margin: 2px 2px;
+        background-color: rgba(26, 26, 46, 0.623);
+      }
+
+      .rating {
+        display: inline;
+        border: 1px rgba(60, 196, 230, 0.467) solid;
+        padding: 1px;
+        margin: 2px 2px;
+        background-color: rgba(26, 26, 46, 0.623);
+      }
+
+      .view {
+        display: inline;
+        border: 1px rgba(60, 196, 230, 0.467) solid;
+        padding: 1px;
+        margin: 2px 2px;
+        background-color: rgba(26, 26, 46, 0.623);
+      }
+    }
+  }
+}

@@ -1,1 +1,60 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+body {
+  background-color: #2222;
+}
+
+.form-exit {
+  display: inline;
+}
+
+.form-exit form {
+  display: inline;
+}
+
+#is_admin {
+  color: red;
+}
+
+.posts .container {
+  max-width: 300px;
+}
+
+.posts .container .post_name {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.posts .container .post_main {
+  border: 1px #2257 solid;
+  padding: 5px;
+}
+
+.posts .container .post_info {
+  display: block;
+  margin-top: 5px;
+  color: whitesmoke;
+}
+
+.posts .container .post_info .author {
+  display: inline;
+  border: 1px rgba(60, 196, 230, 0.467) solid;
+  padding: 1px;
+  margin: 2px 2px;
+  background-color: rgba(26, 26, 46, 0.623);
+}
+
+.posts .container .post_info .rating {
+  display: inline;
+  border: 1px rgba(60, 196, 230, 0.467) solid;
+  padding: 1px;
+  margin: 2px 2px;
+  background-color: rgba(26, 26, 46, 0.623);
+}
+
+.posts .container .post_info .view {
+  display: inline;
+  border: 1px rgba(60, 196, 230, 0.467) solid;
+  padding: 1px;
+  margin: 2px 2px;
+  background-color: rgba(26, 26, 46, 0.623);
+}
+/*# sourceMappingURL=style.css.map */

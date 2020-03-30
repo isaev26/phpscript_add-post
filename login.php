@@ -25,6 +25,7 @@ if (!isset($_SESSION['logged_user'])) {
     <input type="password" name="password">
     <input type="submit" value="Войти">
   </form>
+  <a href="reg.php">Регистрация</a>
 </body>
 
 </html>
