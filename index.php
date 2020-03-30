@@ -24,7 +24,8 @@ $is_admin = $_SESSION['is_admin'];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="template/style.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="template/font-awesome.css">
+  <title>Главная</title>
 </head>
 
 <body>
@@ -38,7 +39,7 @@ $is_admin = $_SESSION['is_admin'];
     </form>
   </div>
   <?
-  $posts = mysqli_query($mysqli, "SELECT * FROM `posts`");
+  $posts = mysqli_query($mysqli, "SELECT * FROM `posts` LIMIT 5");
   ?>
   <div class="posts">
     <div class="container">
@@ -51,12 +52,47 @@ $is_admin = $_SESSION['is_admin'];
         </div>
         <div class="post_info">
           <div class="author"><? echo $row['author'] ?></div>
-          <div class="rating">rating: <? echo $row['rating'] ?></div>
-          <div class="view">view: <? echo $row['view'] ?></div>
+          <div class="rating">rating:
+            <? if ($_SESSION['like'] != 'up') { ?>
+              <form action="index.php" method="POST">
+                <input type="text" name="rating" value="up" hidden>
+                <input type="text" name="id_post" value="<? echo $row['id_post'] ?>" hidden>
+                <input type="submit" value="up">
+              </form>
+            <? } ?>
+            <? echo $row['rating'] ?>
+            <? if ($_SESSION['like'] != 'down') { ?>
+              <form action="index.php" method="POST">
+                <input type="text" name="rating" value="down" hidden>
+                <input type="text" name="id_post" value="<? echo $row['id_post'] ?>" hidden>
+                <input type="submit" value="down">
+              </form>
+            <? } ?>
+          </div>
+          <div class="view">view: <? echo $_SESSION['like'];
+                                  echo $row['view']; ?></div>
         </div>
-      <? } ?>
+      <? }
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $rating = $_POST['rating'];
+        $id_post = $_POST['id_post'];
+        if ($rating == "up") {
+          $_SESSION['like'] = 'up';
+          $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`+1 WHERE `id_post`='$id_post'");
+          unset($_SESSION['like']);
+        } elseif ($rating == "down") {
+          $_SESSION['like'] = 'down';
+          $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`-1 WHERE `id_post`='$id_post'");
+          unset($_SESSION['like']);
+        }
+      }
+      ?>
     </div>
   </div>
+  <div class="add_post">
+    <a href="add_post.php">Добавить пост</a>
+  </div>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 
 </html>
