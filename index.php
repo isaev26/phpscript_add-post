@@ -3,6 +3,13 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+$mysqli = new mysqli("localhost", "root", "", "test");
+/* проверяем соединение */
+if (mysqli_connect_errno()) {
+  printf("Connect failed: %s\n", mysqli_connect_error());
+  exit();
+}
+
 if (!isset($_SESSION['logged_user'])) {
   header("LOCATION: login.php");
   exit;
@@ -30,20 +37,24 @@ $is_admin = $_SESSION['is_admin'];
       <input type="submit" value="Выход">
     </form>
   </div>
-
+  <?
+  $posts = mysqli_query($mysqli, "SELECT * FROM `posts`");
+  ?>
   <div class="posts">
     <div class="container">
-      <div class="post_name">
-        Имя
-      </div>
-      <div class="post_main">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam assumenda cumque, fugiat, veniam rerum atque consequuntur maxime quidem soluta laudantium at? Sapiente, quasi similique? Nisi, voluptas. Modi non explicabo error quos deserunt id cum quaerat. Cupiditate vitae iste impedit nostrum voluptas excepturi, quibusdam explicabo aperiam maiores odit est eveniet fuga iure labore laborum ad consequuntur temporibus dicta. Sequi iste non quos, provident rem enim vitae ullam tempora fugiat ipsa? Ipsam odit quidem nisi reiciendis. Impedit a voluptatibus error accusantium non beatae, aspernatur sit aliquam. Pariatur dolore vitae quis optio voluptatibus. Fugiat ducimus quia quaerat rerum minus recusandae ullam nulla molestiae.
-      </div>
-      <div class="post_info">
-        <div class="author">author: admin</div>
-        <div class="rating">rating: 15</div>
-        <div class="view">view :158</div>
-      </div>
+      <? while ($row = mysqli_fetch_array($posts)) { ?>
+        <div class="post_name">
+          <? echo $row['post_name'] ?>
+        </div>
+        <div class="post_main">
+          <? echo $row['post'] ?>
+        </div>
+        <div class="post_info">
+          <div class="author"><? echo $row['author'] ?></div>
+          <div class="rating">rating: <? echo $row['rating'] ?></div>
+          <div class="view">view: <? echo $row['view'] ?></div>
+        </div>
+      <? } ?>
     </div>
   </div>
 </body>
