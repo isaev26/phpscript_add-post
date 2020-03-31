@@ -14,6 +14,10 @@ body {
   color: red;
 }
 
+.posts {
+  margin: 10px 10px;
+}
+
 .posts .container {
   max-width: 300px;
 }

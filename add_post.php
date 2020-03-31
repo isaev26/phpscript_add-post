@@ -39,6 +39,29 @@ $is_admin = $_SESSION['is_admin'];
     </form>
   </div>
 
+  <form action="add_post.php" method="POST">
+    <label for="GET-name-post">Называние:</label><br>
+    <input type="text" name="pname" size="28"><br>
+    <label for="GET-post">Пост:</label><br>
+    <textarea name="post" cols="30" rows="10"></textarea><br>
+    <button type="submit">Добавить пост</button>
+  </form>
+  <?
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $pname = $_POST['pname'];
+    $post = $_POST['post'];
+    $today = date("Y-m-d");
+    if (!empty($pname) && !empty($post)) {
+      echo 'Post name: <b>' . $pname . '</b><br>';
+      echo 'post: ' . $post . '<br>';
+      echo 'author: ' . $login . '<br>';
+      echo $today;
+      $add_post = mysqli_query($mysqli, "INSERT INTO `posts`(`id_post`, `time`, `author`, `post_name`, `post`, `rating`, `view`) 
+      VALUES (NULL,'$today','$login','$pname','$post','0','1')");
+    }
+  }
+  ?>
+
 
   <div class="home">
     <a href="index.php">Главная</a>
