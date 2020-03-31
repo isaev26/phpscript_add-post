@@ -39,11 +39,11 @@ $is_admin = $_SESSION['is_admin'];
     </form>
   </div>
   <?
-  $posts = mysqli_query($mysqli, "SELECT * FROM `posts` LIMIT 5");
+  $posts = mysqli_query($mysqli, "SELECT * FROM `posts` ORDER BY `id_post` DESC LIMIT 5");
   ?>
   <div class="posts">
-    <div class="container">
-      <? while ($row = mysqli_fetch_array($posts)) { ?>
+    <? while ($row = mysqli_fetch_array($posts)) { ?>
+      <div class="container">
         <div class="post_name">
           <? echo $row['post_name'] ?>
         </div>
@@ -72,22 +72,24 @@ $is_admin = $_SESSION['is_admin'];
           <div class="view">view: <? echo $_SESSION['like'];
                                   echo $row['view']; ?></div>
         </div>
-      <? }
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $rating = $_POST['rating'];
-        $id_post = $_POST['id_post'];
-        if ($rating == "up") {
-          $_SESSION['like'] = 'up';
-          $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`+1 WHERE `id_post`='$id_post'");
-          unset($_SESSION['like']);
-        } elseif ($rating == "down") {
-          $_SESSION['like'] = 'down';
-          $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`-1 WHERE `id_post`='$id_post'");
-          unset($_SESSION['like']);
+
+        <?
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $rating = $_POST['rating'];
+          $id_post = $_POST['id_post'];
+          if ($rating == "up") {
+            $_SESSION['like'] = 'up';
+            $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`+1 WHERE `id_post`='$id_post'");
+            unset($_SESSION['like']);
+          } elseif ($rating == "down") {
+            $_SESSION['like'] = 'down';
+            $rat_post = mysqli_query($mysqli, "UPDATE `posts` SET `rating`=`rating`-1 WHERE `id_post`='$id_post'");
+            unset($_SESSION['like']);
+          }
         }
-      }
-      ?>
-    </div>
+        ?>
+      </div>
+    <? } ?>
   </div>
   <div class="add_post">
     <a href="add_post.php">Добавить пост</a>

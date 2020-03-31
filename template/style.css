@@ -19,11 +19,13 @@ body {
 }
 
 .posts .container {
-  max-width: 300px;
+  margin-bottom: 10px;
+  max-width: 365px;
 }
 
 .posts .container .post_name {
   margin-left: 20px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
